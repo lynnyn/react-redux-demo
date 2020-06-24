@@ -1,17 +1,17 @@
-import React , { useEffect, useState} from 'react'
+import React , { useState} from 'react'
 import { connect } from 'react-redux'
 import { postUser } from './redux'
 
-function PostContainer () {
+function PostContainer ({postUser}) {
 
 const [userId, setUserId] = useState('')
 const [title, setTitle] = useState('')
 const [body,setBody] = useState('')
 
 const submitHandler=(e) =>{
-    e.preventDefault();
     const user = {userId, title, body}
-    postUser(user)
+    e.preventDefault();
+    postUser(user)  
 }
         
   return (
@@ -32,14 +32,19 @@ const submitHandler=(e) =>{
   )
 }
 
-  
+const mapStateToProps = state =>{
+    return{
+        user: state.post.user
+    }
+}
+ 
   const mapDispatchToProps = dispatch => {
     return {
-      postUser: () => dispatch(postUser())
+      postUser: (user) => dispatch(postUser(user))
     }
   }
   
   export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(PostContainer)

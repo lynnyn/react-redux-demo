@@ -4,13 +4,11 @@ import {
     SAVE_USER_TO_SERVER_FALIURE
 } from './postTypes'
 import axios from 'axios'
-import { isCompositeComponent } from 'react-dom/test-utils'
 
 export const saveUserRequest = (user) =>{
-      console.log(user)
     return{
       type: SAVE_USER_TO_SERVER,
-      payload: {user}
+      payload: user
     }
   }
 
@@ -28,15 +26,18 @@ export const saveUserRequest = (user) =>{
     }
   }
 
-  export const postUser = (dispatch,user) => 
-    {
+  export const postUser = (user) => 
+    {   
+      return(dispatch) =>{
         dispatch(saveUserRequest(user))
-        axios.post('https://jsonplaceholder.typicode.com/users', user)
+        axios.post('https://jsonplaceholder.typicode.com/posts', user)
         .then(response =>{
             dispatch(saveUsersSuccess(response))
         })
         .catch(error =>{
             dispatch(saveUsersFailure(error.message))
         })
+      }
     }
+
   
