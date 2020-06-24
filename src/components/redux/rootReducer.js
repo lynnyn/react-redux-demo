@@ -2,11 +2,13 @@ import { combineReducers } from 'redux'
 import cakeReducer from './cake/cakeReducer'
 import iceCreamReducer from './iceCream/iceCreamReducer'
 import oliveReducer from './olive/oliveReducer'
+import userReducer from './user/userReducer'
 
 const rootReducer = combineReducers({
     cake: cakeReducer,
     iceCream : iceCreamReducer,
-    olive : oliveReducer
+    olive : oliveReducer,
+    user: userReducer
 })
 
 export default rootReducer
